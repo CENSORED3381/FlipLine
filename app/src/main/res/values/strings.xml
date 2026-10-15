@@ -7,4 +7,12 @@
     <string name="meus_projetos">Meus projetos</string>
     <string name="configuracoes">Configurações</string>
     <string name="em_breve">Este recurso chega nas próximas fases.</string>
+    <string name="continuar_desenho">Continuar desenho</string>
+    <string name="voltar">‹ Voltar</string>
+    <string name="desfazer">Desfazer</string>
+    <string name="refazer">Refazer</string>
+    <string name="pincel">Pincel</string>
+    <string name="borracha">Borracha</string>
+    <string name="ajustar">Ajustar vista</string>
+    <string name="espessura">Espessura</string>
 </resources>

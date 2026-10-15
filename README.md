@@ -7,7 +7,8 @@ Criado por Huzeifa.
 ## Status
 
 - Fase 0: base do projeto, splash e tela inicial (concluída)
-- Próxima: Fase 1, desenho básico
+- Fase 1: desenho básico (pincel, borracha, cor, espessura, desfazer/refazer, zoom/giro com dois dedos) (em teste)
+- Próxima: Fase 2, ajudas para o dedo
 
 O planejamento completo está em `docs/planejamento.md`.
 
@@ -20,5 +21,6 @@ baixe o artefato **Flipline-debug-apk**.
 ## Estrutura
 
 - `app/src/main/java/com/huzeifa/flipline/`: código Kotlin
+- `app/src/main/java/com/huzeifa/flipline/draw/`: motor de desenho (traços, bitmap, desfazer) e a vista de toque
 - `app/src/main/res/`: textos, cores, temas e ícone
 - `.github/workflows/build.yml`: workflow que compila o APK

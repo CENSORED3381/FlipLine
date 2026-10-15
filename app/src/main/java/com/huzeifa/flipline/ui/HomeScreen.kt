@@ -24,7 +24,11 @@ import androidx.compose.ui.unit.dp
 import com.huzeifa.flipline.R
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    temDesenho: Boolean,
+    onNovoDesenho: () -> Unit,
+    onContinuar: () -> Unit
+) {
     var aviso by remember { mutableStateOf("") }
     val textoEmBreve = stringResource(R.string.em_breve)
 
@@ -50,8 +54,18 @@ fun HomeScreen() {
         )
         Spacer(modifier = Modifier.height(32.dp))
 
-        Button(onClick = { aviso = textoEmBreve }) {
-            Text(stringResource(R.string.novo_desenho))
+        if (temDesenho) {
+            Button(onClick = onContinuar) {
+                Text(stringResource(R.string.continuar_desenho))
+            }
+            Spacer(modifier = Modifier.height(12.dp))
+            OutlinedButton(onClick = onNovoDesenho) {
+                Text(stringResource(R.string.novo_desenho))
+            }
+        } else {
+            Button(onClick = onNovoDesenho) {
+                Text(stringResource(R.string.novo_desenho))
+            }
         }
         Spacer(modifier = Modifier.height(12.dp))
         OutlinedButton(onClick = { aviso = textoEmBreve }) {
