@@ -11,8 +11,8 @@ android {
         applicationId = "com.huzeifa.flipline"
         minSdk = 26
         targetSdk = 34
-        versionCode = 4
-        versionName = "0.3.0"
+        versionCode = 5
+        versionName = "0.4.0"
     }
 
     buildTypes {
@@ -55,4 +55,5 @@ dependencies {
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.foundation:foundation")
     implementation("androidx.compose.material3:material3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
 }

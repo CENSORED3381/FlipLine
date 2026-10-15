@@ -24,8 +24,8 @@ jobs:
         with:
           gradle-version: '8.9'
 
-      - name: Verificações estáticas da Fase 2
-        run: python3 tools/verificar_fase2.py
+      - name: Verificações estáticas da Fase 3
+        run: python3 tools/verificar_fase3.py
 
       - name: Compilar APK de debug
         run: gradle assembleDebug --stacktrace

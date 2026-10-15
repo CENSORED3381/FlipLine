@@ -116,10 +116,11 @@ Cada fase termina com um APK testável no celular.
 - Gestos de atalho e rejeição de palma
 
 ### Fase 3 — Camadas e ferramentas
-- Camadas (ocultar, reordenar, opacidade)
-- Balde, conta-gotas, formas, seleção
-- Assistência de forma, guias e simetria
-- Salvar e abrir projetos, exportar PNG
+- [x] Camadas (ocultar, reordenar, opacidade e modos Normal/Multiplicar/Tela)
+- [x] Balde, conta-gotas, linha, retângulo, elipse e seleção com movimentação
+- [x] Assistência de forma, grade, réguas, encaixe e simetria
+- [x] Guardar/abrir projeto `.flipline` e exportar PNG transparente
+- [ ] Validar compilação Gradle e comportamento das ferramentas num dispositivo Android
 
 ### Fase 4 — Animação
 - Linha do tempo com quadros
@@ -147,7 +148,16 @@ Cada fase termina com um APK testável no celular.
 
 ## 9. Pendências a definir
 
-- [ ] ID do pacote (sugestão: `com.huzeifa.flipline`)
-- [ ] Tema visual: escuro, claro ou ambos, e cor principal
-- [ ] Formatos de exportação desde o início ou por etapas
-- [ ] Aprovar ou ajustar a ordem das fases
+- [x] ID do pacote: `com.huzeifa.flipline`
+- [x] Tema visual inicial: escuro com destaque laranja
+- [x] Exportação por etapas: PNG na Fase 3; GIF/MP4 e sequência de PNGs na Fase 5
+- [x] Ordem de fases adotada; as fases de animação e polimento continuam futuras
+
+
+---
+
+## Estado registado da Fase 3 (0.4.0)
+
+A implementação adiciona um motor raster com até 12 camadas, histórico de ações por camada, preenchimento contíguo, seleção móvel e modos de mesclagem Normal/Multiplicar/Tela. Os projetos são arquivos ZIP com metadados JSON e um PNG por camada; a leitura verifica dimensões, número/tamanho das entradas e referências antes de aceitar o documento. A tela está fixa em 1200 × 1600 nesta versão para controlar a utilização de memória.
+
+**Validação obrigatória antes de considerar a fase concluída:** executar a workflow `Compilar APK`, instalar o artefacto no Android e testar pincel/borracha, balde dentro de contorno na mesma camada, ordem/visibilidade/opacidade/mesclagem, seleção/movimentação com undo/redo, formas e simetria, guardar/abrir `.flipline` e exportar PNG com transparência. A execução do verificador estático não é prova de compilação nem de ausência de bugs.

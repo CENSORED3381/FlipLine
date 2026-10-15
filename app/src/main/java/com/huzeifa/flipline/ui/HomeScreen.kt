@@ -12,10 +12,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -28,10 +24,9 @@ fun HomeScreen(
     temDesenho: Boolean,
     onNovoDesenho: () -> Unit,
     onContinuar: () -> Unit,
-    onConfiguracoes: () -> Unit
+    onConfiguracoes: () -> Unit,
+    onAbrirProjeto: () -> Unit
 ) {
-    var aviso by remember { mutableStateOf("") }
-    val textoEmBreve = stringResource(R.string.em_breve)
 
     Column(
         modifier = Modifier
@@ -69,7 +64,7 @@ fun HomeScreen(
             }
         }
         Spacer(modifier = Modifier.height(12.dp))
-        OutlinedButton(onClick = { aviso = textoEmBreve }) {
+        OutlinedButton(onClick = onAbrirProjeto) {
             Text(stringResource(R.string.meus_projetos))
         }
         Spacer(modifier = Modifier.height(12.dp))
@@ -77,13 +72,5 @@ fun HomeScreen(
             Text(stringResource(R.string.configuracoes))
         }
 
-        if (aviso.isNotEmpty()) {
-            Spacer(modifier = Modifier.height(24.dp))
-            Text(
-                text = aviso,
-                color = MaterialTheme.colorScheme.onBackground,
-                style = MaterialTheme.typography.bodyMedium
-            )
-        }
     }
 }

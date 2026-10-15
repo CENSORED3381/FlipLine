@@ -6,25 +6,16 @@ import android.graphics.Path
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffXfermode
 
-/**
- * Desenha um traço aos poucos, suavizando com curvas (pontos médios).
- * O mesmo código serve para o desenho ao vivo e para refazer tudo
- * depois de um desfazer, então o resultado é sempre idêntico.
- */
-class RenderizadorTraco(private val tela: Canvas, traco: Traco) {
-
+/** Renderizador incremental partilhado pelo desenho ao vivo e pela reconstrução do histórico. */
+class RenderizadorTraco(private val tela: Canvas, private val traco: Traco) {
     private val pincel = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         style = Paint.Style.STROKE
         strokeCap = Paint.Cap.ROUND
         strokeJoin = Paint.Join.ROUND
-        strokeWidth = traco.largura
-        if (traco.borracha) {
-            xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
-        } else {
-            color = traco.cor
-        }
+        strokeWidth = traco.largura.coerceAtLeast(1f)
+        if (traco.borracha) xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
+        else color = traco.cor
     }
-
     private val caminho = Path()
     private var anteriorX = 0f
     private var anteriorY = 0f
@@ -32,30 +23,49 @@ class RenderizadorTraco(private val tela: Canvas, traco: Traco) {
     private var meioY = 0f
 
     fun iniciar(x: Float, y: Float) {
-        tela.drawPoint(x, y, pincel)
-        anteriorX = x
-        anteriorY = y
-        meioX = x
-        meioY = y
+        desenharPonto(x, y)
+        anteriorX = x; anteriorY = y; meioX = x; meioY = y
     }
 
     fun adicionar(x: Float, y: Float) {
+        if (traco.segmentosLineares) {
+            tela.drawLine(anteriorX, anteriorY, x, y, pincel)
+            if (traco.simetriaVertical) {
+                tela.drawLine(traco.larguraDocumento - anteriorX, anteriorY,
+                    traco.larguraDocumento - x, y, pincel)
+            }
+            anteriorX = x; anteriorY = y; meioX = x; meioY = y
+            return
+        }
         val novoMeioX = (anteriorX + x) / 2f
         val novoMeioY = (anteriorY + y) / 2f
         caminho.rewind()
         caminho.moveTo(meioX, meioY)
         caminho.quadTo(anteriorX, anteriorY, novoMeioX, novoMeioY)
         tela.drawPath(caminho, pincel)
-        meioX = novoMeioX
-        meioY = novoMeioY
-        anteriorX = x
-        anteriorY = y
+        if (traco.simetriaVertical) {
+            caminho.rewind()
+            caminho.moveTo(traco.larguraDocumento - meioX, meioY)
+            caminho.quadTo(traco.larguraDocumento - anteriorX, anteriorY, traco.larguraDocumento - novoMeioX, novoMeioY)
+            tela.drawPath(caminho, pincel)
+        }
+        meioX = novoMeioX; meioY = novoMeioY
+        anteriorX = x; anteriorY = y
     }
 
     fun finalizar() {
-        caminho.rewind()
-        caminho.moveTo(meioX, meioY)
-        caminho.lineTo(anteriorX, anteriorY)
+        if (traco.segmentosLineares) return
+        caminho.rewind(); caminho.moveTo(meioX, meioY); caminho.lineTo(anteriorX, anteriorY)
         tela.drawPath(caminho, pincel)
+        if (traco.simetriaVertical) {
+            caminho.rewind(); caminho.moveTo(traco.larguraDocumento - meioX, meioY)
+            caminho.lineTo(traco.larguraDocumento - anteriorX, anteriorY)
+            tela.drawPath(caminho, pincel)
+        }
+    }
+
+    private fun desenharPonto(x: Float, y: Float) {
+        tela.drawPoint(x, y, pincel)
+        if (traco.simetriaVertical) tela.drawPoint(traco.larguraDocumento - x, y, pincel)
     }
 }
