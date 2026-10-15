@@ -15,4 +15,21 @@
     <string name="borracha">Borracha</string>
     <string name="ajustar">Ajustar vista</string>
     <string name="espessura">Espessura</string>
+    <string name="fase2_titulo">Ajudas para desenhar com o dedo</string>
+    <string name="fase2_descricao">As alterações são guardadas automaticamente neste dispositivo. Ative apenas os recursos que preferir.</string>
+    <string name="estabilizacao_titulo">Estabilização do traço</string>
+    <string name="estabilizacao_descricao">Reduz pequenos tremores do dedo com um filtro adaptativo, mantendo uma resposta natural nos movimentos rápidos.</string>
+    <string name="intensidade_estabilizacao">Intensidade da estabilização</string>
+    <string name="intensidade_ajuda">Menor intensidade dá mais liberdade ao traço; maior intensidade suaviza mais os movimentos lentos.</string>
+    <string name="cursor_deslocado_titulo">Cursor deslocado</string>
+    <string name="cursor_deslocado_descricao">Desenha com o ponto de referência acima e à direita do dedo, mostrando a posição real do pincel sem ficar tapada pela mão.</string>
+    <string name="distancia_cursor">Distância vertical do cursor</string>
+    <string name="atalhos_gestos_titulo">Atalhos com vários dedos</string>
+    <string name="atalhos_gestos_descricao">Toque rapidamente com dois dedos para desfazer ou com três dedos para refazer. Arrastar os dedos continua a permitir navegar.</string>
+    <string name="rejeicao_palma_titulo">Rejeição de palma</string>
+    <string name="rejeicao_palma_descricao">Ignora contactos invulgarmente grandes. Alguns aparelhos não comunicam o tamanho do contacto, por isso a proteção depende do dispositivo.</string>
+    <string name="zoom_gestual_titulo">Navegação com dois dedos</string>
+    <string name="zoom_gestual_descricao">Permite ampliar, mover e rodar a folha com dois dedos.</string>
+    <string name="gestos_dica">Dica: durante a navegação, mova os dois dedos. Os toques rápidos sem deslocamento são reservados para desfazer e refazer.</string>
+    <string name="repor_configuracoes">Repor configurações padrão</string>
 </resources>

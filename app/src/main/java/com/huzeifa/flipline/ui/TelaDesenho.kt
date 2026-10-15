@@ -37,6 +37,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.huzeifa.flipline.R
 import com.huzeifa.flipline.draw.MotorDesenho
+import com.huzeifa.flipline.draw.PreferenciasDesenho
 import com.huzeifa.flipline.draw.VistaDesenho
 
 private val paleta: List<Int> = listOf(
@@ -46,8 +47,21 @@ private val paleta: List<Int> = listOf(
 ).map { it.toInt() }
 
 @Composable
-fun TelaDesenho(motor: MotorDesenho, onVoltar: () -> Unit) {
+fun TelaDesenho(
+    motor: MotorDesenho,
+    preferencias: PreferenciasDesenho,
+    onVoltar: () -> Unit
+) {
     val f = motor.ferramentas
+    // Ler as preferências durante a composição garante que o AndroidView seja
+    // atualizado sempre que uma opção persistida mudar.
+    val estabilizacaoAtiva = preferencias.estabilizacaoAtiva
+    val intensidadeEstabilizacao = preferencias.intensidadeEstabilizacao
+    val cursorDeslocadoAtivo = preferencias.cursorDeslocadoAtivo
+    val distanciaCursorDp = preferencias.distanciaCursorDp
+    val atalhosGestosAtivos = preferencias.atalhosGestosAtivos
+    val rejeicaoPalmaAtiva = preferencias.rejeicaoPalmaAtiva
+    val zoomGestualAtivo = preferencias.zoomGestualAtivo
     var versao by remember { mutableIntStateOf(0) }
     var vista by remember { mutableStateOf<VistaDesenho?>(null) }
 
@@ -96,6 +110,13 @@ fun TelaDesenho(motor: MotorDesenho, onVoltar: () -> Unit) {
                 v.borracha = f.borracha
                 v.cor = f.cor
                 v.larguraTraco = if (f.borracha) f.larguraBorracha else f.larguraPincel
+                v.estabilizacaoAtiva = estabilizacaoAtiva
+                v.intensidadeEstabilizacao = intensidadeEstabilizacao
+                v.cursorDeslocadoAtivo = cursorDeslocadoAtivo
+                v.distanciaCursorDp = distanciaCursorDp
+                v.atalhosGestosAtivos = atalhosGestosAtivos
+                v.rejeicaoPalmaAtiva = rejeicaoPalmaAtiva
+                v.zoomGestualAtivo = zoomGestualAtivo
             }
         )
 

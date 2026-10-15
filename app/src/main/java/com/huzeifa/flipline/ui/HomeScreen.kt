@@ -27,7 +27,8 @@ import com.huzeifa.flipline.R
 fun HomeScreen(
     temDesenho: Boolean,
     onNovoDesenho: () -> Unit,
-    onContinuar: () -> Unit
+    onContinuar: () -> Unit,
+    onConfiguracoes: () -> Unit
 ) {
     var aviso by remember { mutableStateOf("") }
     val textoEmBreve = stringResource(R.string.em_breve)
@@ -72,7 +73,7 @@ fun HomeScreen(
             Text(stringResource(R.string.meus_projetos))
         }
         Spacer(modifier = Modifier.height(12.dp))
-        OutlinedButton(onClick = { aviso = textoEmBreve }) {
+        OutlinedButton(onClick = onConfiguracoes) {
             Text(stringResource(R.string.configuracoes))
         }
 
