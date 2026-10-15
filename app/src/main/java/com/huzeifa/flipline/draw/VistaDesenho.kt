@@ -73,12 +73,21 @@ class VistaDesenho(context: Context) : View(context) {
     }
 
     override fun onDraw(canvas: Canvas) {
+        // O Compose pode não recortar a vista sozinho: sem este recorte, o fundo
+        // e o papel cobrem a barra de cima (Voltar, Desfazer, Refazer).
+        canvas.save()
+        canvas.clipRect(0f, 0f, width.toFloat(), height.toFloat())
         canvas.drawColor(0xFF2B2B2B.toInt())
-        val m = motor ?: return
+        val m = motor
+        if (m == null) {
+            canvas.restore()
+            return
+        }
         canvas.save()
         canvas.concat(m.matrizVista)
         canvas.drawRect(0f, 0f, m.largura.toFloat(), m.altura.toFloat(), pincelFundo)
         canvas.drawBitmap(m.bitmap, 0f, 0f, pincelBitmap)
+        canvas.restore()
         canvas.restore()
     }
 
