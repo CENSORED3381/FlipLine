@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Flipline</string>
+    <string name="criado_por">CRIADO POR HUZEIFA</string>
+    <string name="slogan">Desenhe e anime com o dedo</string>
+    <string name="novo_desenho">Novo desenho</string>
+    <string name="meus_projetos">Meus projetos</string>
+    <string name="configuracoes">Configurações</string>
+    <string name="em_breve">Este recurso chega nas próximas fases.</string>
+</resources>
